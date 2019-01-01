@@ -1,0 +1,17 @@
+@import 'https://fonts.googleapis.com/css?family=Mitr';
+
+.font {
+    font-family: 'Mitr', sans-serif;
+    border-radius: 24px;
+}
+
+nav {
+    border-radius: 24px;
+    color: white;
+}
+
+.border-radius{
+    border-radius: 24px;
+}
+
+
