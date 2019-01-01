@@ -118,6 +118,7 @@ function carousel() {
     setTimeout(carousel, 5000);
 }
 </script>
+	<!-- Script สำหรับเเสดงผล Status แบบเรียลไทม์ -->
 <script>
 $(document).ready(function(){
 	setInterval(function(){
