@@ -26,7 +26,7 @@ Class User{
     }
 }
         if($username and $password and $confpassword !== ""){ 
-            query("INSERT INTO `user` (`uid`,`username`,`password`,`point`,`admin`) VALUES ('','".$username."','".$password."','0','false')");
+            query("INSERT INTO `user` (`uid`,`username`,`password`,`point`,`credits`,`rank`,`admin`) VALUES ('','".$username."','".$password."','0','0','member','false')");
             $i = query("SELECT * FROM `user` WHERE `username` =?;",array($username))->fetch();
             $_SESSION['username'] = $i['username'];
             echo "<script type='text/javascript'>
@@ -57,6 +57,7 @@ Class User{
                 if($i['password'] == $password){
                     $_SESSION['username'] = $i['username'];
                     $_SESSION['point'] = $i['point'];
+                    $_SESSION['admin'] = $i['admin'];
 
                     echo "<script type='text/javascript'>
                         swal('Success','เข้าสู่ระบบสำเร็จ','success');
@@ -64,11 +65,11 @@ Class User{
                             location.href = '?page=index';
                         }, 2000);
                         </script>";
+                }else{
+                    echo "<script type='text/javascript'>
+                    swal('Error','Username & Password ไม่ถูกต้อง','error');
+                    </script>";
                 }
-            }else{
-                echo "<script type='text/javascript'>
-                swal('Error','Username & Password ไม่ถูกต้อง','error');
-                </script>";
             }
         }
     }

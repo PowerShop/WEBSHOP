@@ -6,7 +6,7 @@ if(!$_SESSION['username']){
 }
 ?>
 <!doctype html>
-<html lang="en">
+<html class="html" lang="en">
   <head>
     <title>Home</title>
     <!-- Required meta tags -->
@@ -18,8 +18,8 @@ if(!$_SESSION['username']){
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     
-  </head>   
-  <div id="bg"><div>
+  </head> 
+  
   <body class="col-md-12 font mx-auto mt-2">
  
   <?php include_once('menu.php'); ?>
@@ -78,19 +78,27 @@ if(!$_SESSION['username']){
     <div class="card-body">
       <h4 class="card-title"><i class="fa fa-trophy" aria-hidden="true"></i> อันดับยอดเติมเงินสูงสุด</h4>
       <p class="card-text">
-        <table class="table text-center">
+        <table class="text-center table">
           <thead>
             <tr>
+              <th>#</th>
               <th><i class="fa fa-user-circle" aria-hidden="true"></i> ชื่อผู้เล่น</th>
               <th><i class="fa fa-money" aria-hidden="true"></i> จำนวนเงินเติมสะสม</th>
               
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td scope="row">#</td>
-              <td>#</td>
-            </tr>
+            <?php
+                  $query = "SELECT * FROM `user` ORDER BY `credits` DESC LIMIT 5;"; 
+                  if($result = query($query)) { 
+                  while ($row = $result->fetch()){ 
+                ?>
+                <tr>
+              <td scope="row"><img class="img" src="<?php echo $row['avatar']; ?>" alt="Avatar" style="width:50px"></td>
+              <td><?php echo $row['username']; ?></td>
+              <td><?php echo $row['credits']; ?></td>
+                  </tr>
+                  <?php }} ?>
           </tbody>
         </table>
       </p>
@@ -118,7 +126,6 @@ function carousel() {
     setTimeout(carousel, 5000);
 }
 </script>
-	<!-- Script สำหรับเเสดงผล Status แบบเรียลไทม์ -->
 <script>
 $(document).ready(function(){
 	setInterval(function(){

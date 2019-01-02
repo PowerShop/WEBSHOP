@@ -11,46 +11,51 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
   </head>
   
-  <body class="text-center col-md-12 mx-auto mt-3 font">
+  <body class="col-md-12 mx-auto mt-3 font">
   <nav class="navbar navbar-expand-lg navbar-dark bg-success">
-      <a class="navbar-brand" href="#">Menu</a>
+      <a class="navbar-brand" href="#"><i class="fa fa-list" aria-hidden="true"></i> Menu</a>
       <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId"
           aria-expanded="false" aria-label="Toggle navigation"></button>
       <div class="collapse navbar-collapse" id="collapsibleNavId">
           <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
               <li class="nav-item active">
-                  <a class="nav-link" href="?page=login">Login</a>
+                  <a class="nav-link" href="?page=login"><i class="fa fa-sign-in" aria-hidden="true"></i> Login</a>
               </li>
               <li class="nav-item active">
-                  <a class="nav-link" href="?page=register">Register</a>
+                  <a class="nav-link" href="?page=register"><i class="fa fa-sign-in" aria-hidden="true"></i> Register</a>
             </li>
           </ul>
       </div>
   </nav>
 <form action="" method="post">
-    <div class="card mt-2">
-        <div class="card-header" style="background-color: #FF7F50;">
-            Register
-        </div>
-        <div class="card-body">
-            <div class="form-group">
-                <label for="username">Username</label>
+            <div class="card mt-2">
+                <img class="card-img-top" alt="">
+                <div class="card-body bg-warning">
+                    <h4 class="card-title text-center"><i class="fa fa-user-circle" aria-hidden="true"></i> Register</h4>
+                </div>
+            </div>
+            <div class="card mt-2">
+                <img class="card-img-top"  alt="">
+                <div class="card-body">
+                <div class="form-group">
+                <label for="username"><i class="fa fa-user" aria-hidden="true"></i> Username</label>
                 <input type="text" class="form-control" name="username" id="username" placeholder="Username">
             </div>
             <div class="form-group">
-                <label for="password">Password</label>
+                <label for="password"><i class="fa fa-lock" aria-hidden="true"></i> Password</label>
                 <input type="password" class="form-control" name="password" id="password" placeholder="Password">
             </div>
             <div class="form-group">
-                <label for="confirm-password">Confirm Password</label>
+                <label for="confirm-password"><i class="fa fa-lock" aria-hidden="true"></i> Confirm Password</label>
                 <input type="password" class="form-control" name="confirm-password" id="confirm-password" placeholder="Confirm Password">
             </div>
-        </div>
-        <div class="card-footer text-muted" style="background-color: #FF7F50;">
+            <div class="form-group" style="text-align: center;">
             <button type="submit" name="register" class="btn btn-danger">Confirm</button>
-        </div>
-    </div>
+            </div>
+                </div>
+            </div>
 </form>
+<?php include('footer.php'); ?>
 
 <?php
 if(isset($_POST['register'])){

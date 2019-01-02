@@ -29,6 +29,7 @@ if(!$_SESSION['username']){
       <div class="card mt-2">
           <img class="card-img-top" alt="">
           <div class="card-body">
+            <p class="card-text" style="text-align: center;"><img class="img" src="<?php echo $pdo['avatar']; ?>" alt="Avatar" style="width:100px"></p>
             <p class="card-text text-center"><i class="fa fa-user" aria-hidden="true"></i> ชื่อผู้ใช้ : <?php echo $pdo['username']; ?></p>
             <p class="card-text text-center"><i class="fa fa-money" aria-hidden="true"></i> พอยท์คงเหลือ : <?php echo $pdo['point']; ?></p>
             <p class="card-text text-center"><i class="fas fa-piggy-bank"></i> พอยท์สะสม : <?php echo $pdo['credits']; ?> </p>

@@ -21,22 +21,26 @@ if(!$_SESSION['username']){
   <body class="font col-md-12 mx-auto mt-2">
   <?php include ('menu.php'); ?>
   <form method="post" action="">
-      <div class="card mt-2 mx-auto">
-          <div class="card-header bg-warning text-center">
-              <i class="fa fa-gift" aria-hidden="true"></i> Redeem Code
-          </div>
-          <div class="card-body">
-              <div class="form-group">
-                <label for="code"><i class="fa fa-code" aria-hidden="true"></i> โค๊ด 16 ตัว</label>
-                <input type="text" class="form-control" name="code" id="code" maxlength="16" aria-describedby="helpId" placeholder="ABCDEFG....">
-                <small id="helpId" class="form-text text-muted">Redeem code</small>
-              </div>
-          </div>
-          <div class="card-footer text-muted bg-warning text-center">
-              <button type="submit" name="checkredeem" class="btn btn-success"><i class="fa fa-check-circle" aria-hidden="true"></i> Redeem</button>
-          </div>
-      </div>
-</form>
+    <div class="card mt-2 bg-warning">
+        <img class="card-img-top" alt="">
+        <div class="card-body">
+            <h4 class="card-title text-center"><i class="fa fa-gift" aria-hidden="true"></i> Redeem Code</h4>
+        </div>
+    </div>
+    <div class="card mt-2">
+        <img class="card-img-top"  alt="">
+            <div class="card-body">
+                <div class="form-group">
+                    <label for="code"><i class="fa fa-code" aria-hidden="true"></i> โค๊ด 16 ตัว</label>
+                    <input type="text" class="form-control" name="code" id="code" maxlength="16" aria-describedby="helpId" placeholder="ABCDEFG....">
+                    <small id="helpId" class="form-text text-muted">Redeem code</small>
+                </div>
+                <div class="form-group" style="text-align: center;">
+                    <button type="submit" name="checkredeem" class="btn btn-success"><i class="fa fa-check-circle" aria-hidden="true"></i> Redeem</button>
+                </div>
+            </div>
+        </div>
+    </form>
 <?php include('footer.php'); ?>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
