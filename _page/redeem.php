@@ -1,8 +1,8 @@
 <?php
-if(!$_SESSION['username']){
-  rdr('?page=login');
-}else{
- #NoCode
+if (!$_SESSION['username']) {
+    rdr('?page=login');
+} else {
+    //NoCode
 }
 ?>
 <!doctype html>
@@ -19,7 +19,9 @@ if(!$_SESSION['username']){
   </head>
 
   <body class="font col-md-12 mx-auto mt-2">
-  <?php include ('menu.php'); ?>
+  <?php include 'menu.php'; ?>
+  <?php if (isset($_GET['server'])) {
+    ?>
   <form method="post" action="">
     <div class="card mt-2 bg-warning">
         <img class="card-img-top" alt="">
@@ -41,7 +43,40 @@ if(!$_SESSION['username']){
             </div>
         </div>
     </form>
-<?php include('footer.php'); ?>
+  <?php
+}?>
+  <?php
+if (!isset($_GET['server'])) {
+        echo '<div class="card mt-2 text-center">
+                 <img class="card-img-top"alt="">
+                 <div class="card-body">
+                     <h4 class="card-title"><i class="fa fa-server" aria-hidden="true"></i> กรุณาเลือกเซิร์ฟเวอร์</h4>
+                     <p class="card-text"><div class="dropdown">
+                         <button class="btn btn-danger dropdown-toggle" type="button" id="triggerId" data-toggle="dropdown" aria-haspopup="true"
+                                 aria-expanded="false">
+                                     <i class="fa fa-list" aria-hidden="true"></i> Servers
+                                 </button>
+                         <div class="dropdown-menu" aria-labelledby="triggerId">';
+
+        @ini_set('display_errors', '0');
+        $username = $_SESSION['username'];
+        $query = 'SELECT * FROM `server`';
+        $query2 = "SELECT * FROM `user` WHERE `username` = '$username'";
+
+        if ($result = query($query)) {
+            while ($row = $result->fetch()) {
+                echo '
+                             <a class="dropdown-item" href="?page=redeem&server='.$row['name'].'"><i class="fa fa-globe" aria-hidden="true"></i> Server : '.$row['name'].'</a>';
+            }
+        }
+        echo '
+                         </div>
+                     </div></p>
+                 </div>
+             </div>';
+    }
+?>
+<?php include 'footer.php'; ?>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -52,14 +87,15 @@ if(!$_SESSION['username']){
 </body>
 </html>
 <?php
-if(isset($_POST['checkredeem'])){
+if (isset($_POST['checkredeem'])) {
     $redeem = $_POST['code'];
-    if($redeem == ""){
+    $name = $_GET['server'];
+    if ($redeem == '') {
         echo "<script type='text/javascript'>
         swal('Check Code!','กรุณากรอกโค๊ดให้ครบ','warning');
         </script>";
-    }else{
-    $api->redeem->CheckRedeem($redeem);
+    } else {
+        $api->redeem->CheckRedeem($redeem, $name);
     }
 }
 ?>

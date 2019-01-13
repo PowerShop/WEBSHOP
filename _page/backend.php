@@ -1,8 +1,8 @@
 <?php
-if(!$_SESSION['admin'] == "true"){
-  rdr('?page=index');
-}else{
- #NoCode
+if (!$_SESSION['admin'] == 'true') {
+    rdr('?page=index');
+} else {
+    //NoCode
 }
 ?>
 <!doctype html>
@@ -19,19 +19,20 @@ if(!$_SESSION['admin'] == "true"){
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
   </head>
   <body class="col-md-12 font mx-auto sm-auto mt-2">
-  <?php include('menu.php'); ?>
-    <div class="card mt-2">
+  <?php include 'menu.php'; ?>
+    <div class="card mt-2 bg-warning">
         <img class="card-img-top"alt="">
-        <div class="card-body bg-warning">
+        <div class="card-body">
             <h4 class="card-title text-center"><i class="fa fa-home" aria-hidden="true"></i> จัดการหลังร้าน</h4>
-            <p class="card-text text-center"><i class="fas fa-list-ul"></i> เครื่องมือ : <a href="?page=backend&additem=true">เพิ่มสินค้า</a> | 
-            <a href="?page=backend&listitem=true">รายการสินค้า</a> | 
+            <p class="card-text text-center"><i class="fas fa-list-ul"></i> เครื่องมือ : <a href="?page=backend&additem=true">เพิ่มสินค้า</a> |
+            <a href="?page=backend&listitem=true">รายการสินค้า</a> |
             <a href="?page=backend&deleteitem=true">ลบสินค้า</a> |
-             
+
         </p>
         </div>
     </div>
-    <?php if(isset($_GET['additem'])){ ?>
+    <?php if (isset($_GET['additem'])) {
+    ?>
     <div class="card mt-2">
         <img class="card-img-top" alt="">
         <div class="card-body">
@@ -56,12 +57,14 @@ if(!$_SESSION['admin'] == "true"){
                   <label for=""><i class="fa fa-server" aria-hidden="true"></i> เลือกเซิร์ฟเวอร์</label><p>
                   <select class="btn btn-success" name='server'>
                   <?php
-                  $query = "SELECT * FROM `server`";
-                  if($result = query($query)) { 
-                  while ($row = $result->fetch()){ 
-                  ?>
+$query = 'SELECT * FROM `server`';
+    if ($result = query($query)) {
+        while ($row = $result->fetch()) {
+            ?>
                     <option class="" value="<?php echo $row['name']; ?>"> เซิร์ฟเวอร์ : <?php echo $row['name']; ?></option>
-                    <?php }} ?>
+                    <?php
+        }
+    } ?>
                 </select>
                   <p>
                   <small id="helpId" class="text-muted">เลือกเซิร์ฟเวอร์ Ex. Survival</small>
@@ -70,12 +73,14 @@ if(!$_SESSION['admin'] == "true"){
                   <label for=""><i class="fa fa-list" aria-hidden="true"></i> เลือกประเภทสินค้า</label><p>
                   <select class="btn btn-success" name="category">
                   <?php
-                  $query = "SELECT * FROM `categoryshop`";
-                  if($result = query($query)) { 
-                  while ($row = $result->fetch()){ 
-                  ?>
+$query = 'SELECT * FROM `categoryshop`';
+    if ($result = query($query)) {
+        while ($row = $result->fetch()) {
+            ?>
                     <option class="" value="<?php echo $row['name']; ?>"> ประเภทสินค้า : <?php echo $row['name']; ?></option>
-                    <?php }} ?>
+                    <?php
+        }
+    } ?>
                 </select>
                   <p>
                   <small id="helpId" class="text-muted">เลือกประเภทสินค้า Ex. ยศ</small>
@@ -100,8 +105,42 @@ if(!$_SESSION['admin'] == "true"){
                 </form>
         </div>
     </div>
-                  <?php } ?>
-  <?php include('footer.php'); ?>
+                  <?php
+}?>
+     <?php if (isset($_GET['listitem'])) {
+        ?>
+        <div class="card mt-2">
+            <img class="card-img-top" alt="">
+            <div class="card-body">
+                <h4 class="card-title text-center"><i class="fas fa-list-alt"></i> รายการสินค้า</h4>
+                <p class="card-text">
+                    <table class="table text-center">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>#</th>
+                                <th>#</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td scope="row"></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td scope="row"></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </p>
+            </div>
+        </div>
+     <?php
+    }?>
+  <?php include 'footer.php'; ?>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

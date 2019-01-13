@@ -24,14 +24,13 @@
             <li class="nav-item active">
                 <a class="nav-link" href="?page=profile"><i class="fa fa-address-card-o" aria-hidden="true"></i> โปรไฟล์</a>
             </li>
-            <?php if($_SESSION['admin'] == "true"){
-                echo '<li class="nav-item active">
+            <?php if ($_SESSION['admin'] == 'true') {
+    echo '<li class="nav-item active">
                 <a class="nav-link" href="?page=backend"><i class="fa fa-cog" aria-hidden="true"></i> จัดการหลังร้าน</a>
             </li>';
-            }else{
-
-            }
-            ?>
+} else {
+}
+?>
             <li class="nav-item active color">
                 <a class="nav-link color" href="?page=logout"><i class="fa fa-sign-out" aria-hidden="true"></i> ออกจากระบบ</a>
             </li>

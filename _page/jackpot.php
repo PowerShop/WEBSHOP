@@ -20,13 +20,19 @@ if(!$_SESSION['username']){
   </head>
   <body class="font mx-auto col-md-12 mt-2">
       <?php include('menu.php'); ?>
+      <?php if(isset($_GET['server'])){ ?>
       <form action="" method="post">
+        <div class="card mt-2 bg-warning">
+            <img class="card-img-top" alt="">
+            <div class="card-body">
+                <h4 class="card-title text-center"><i class="fa fa-gift" aria-hidden="true"></i> สุ่ม Jackpot</h4>
+            </div>
+        </div>
       <div class="card mt-2">
           <img class="card-img-top" alt="">
           <div class="card-body">
-              <h4 class="card-title text-center"><i class="fa fa-gift" aria-hidden="true"></i> สุ่ม Jackpot</h4>
               <p class="card-text text-center"><i class="fa fa-money" aria-hidden="true"></i> พอยท์คงเหลือ : <?php echo $pdo['point']; ?></p>
-              <p class="card-text text-center" style="text-align: center;"><button type="submit" name="Random" class="btn btn-primary"<?php if($pdo['point'] <= 0){ echo 'disabled'; }else{ }?>>สุ่ม Jackpot</button> <br class="mt-1"/><font color="red">การสุ่ม 1 ครั้งใช้ 1 Point</font></p>
+              <p class="card-text text-center" style="text-align: center;"><button type="submit" name="Random" class="btn btn-primary"<?php if($pdo['point'] <= 0){ echo 'disabled'; }else{ }?>>สุ่ม Jackpot</button><br class="mt-2"/><font color="red">การสุ่ม 1 ครั้งใช้ 1 Point</font></p>
           </div>
       </div>
 </form>
@@ -58,7 +64,38 @@ if(!$_SESSION['username']){
       </p>
     </div>
   </div>
-
+                  <?php } ?>
+     <?php 
+         if(!isset($_GET['server'])){
+             echo '<div class="card mt-2 text-center">
+                 <img class="card-img-top"alt="">
+                 <div class="card-body">
+                     <h4 class="card-title"><i class="fa fa-server" aria-hidden="true"></i> กรุณาเลือกเซิร์ฟเวอร์</h4>
+                     <p class="card-text"><div class="dropdown">
+                         <button class="btn btn-danger dropdown-toggle" type="button" id="triggerId" data-toggle="dropdown" aria-haspopup="true"
+                                 aria-expanded="false">
+                                     <i class="fa fa-list" aria-hidden="true"></i> Servers
+                                 </button>
+                         <div class="dropdown-menu" aria-labelledby="triggerId">';
+                         
+                         @ini_set("display_errors", "0"); 
+                $username = $_SESSION["username"];
+                      $query = "SELECT * FROM `server`";
+                          $query2 = "SELECT * FROM `user` WHERE `username` = '$username'";
+                              
+                                  if($result = query($query)) {
+                                      while ($row = $result->fetch()){ 
+                                        echo '
+                             <a class="dropdown-item" href="?page=jackpot&server='.$row['name'].'"><i class="fa fa-globe" aria-hidden="true"></i> Server : '.$row['name'].'</a>';
+                             
+                              }} 
+                             echo '
+                         </div>
+                     </div></p>
+                 </div>
+             </div>';
+         }
+         ?>
   <?php include('footer.php'); ?>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

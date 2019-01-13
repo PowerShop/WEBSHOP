@@ -1,33 +1,36 @@
 <?php
-Class User{
-    public function Register($username,$password,$confpassword){
+
+class User
+{
+    public function Register($username, $password, $confpassword)
+    {
         global $api;
-        if($username == ""){ #ตรวจสอบค่าว่าง
+        if ($username == '') { //ตรวจสอบค่าว่าง
             echo "<script type='text/javascript'>
             swal('Check Username','โปรดกรอก Username','warning');
             </script>";
-        }else{ #หาก Username ไม่ซํ้า จะทำการตรวจสอบว่า Username ซํ้ากับในระบบหรือไม่
-        if($password == ""){
-            echo "<script type='text/javascript'>
+        } else { //หาก Username ไม่ซํ้า จะทำการตรวจสอบว่า Username ซํ้ากับในระบบหรือไม่
+            if ($password == '') {
+                echo "<script type='text/javascript'>
             swal('Check Password','โปรดกรอก Password','warning');
             </script>";
-        }else{
-        if($confpassword == ""){
-            echo "<script type='text/javascript'>
+            } else {
+                if ($confpassword == '') {
+                    echo "<script type='text/javascript'>
             swal('Check Password','โปรดกรอก Confirm Password','warning');
             </script>";
-        }else{
-            if(query("SELECT * FROM `user` WHERE `username` =?;",array($username))->rowCount()==1){
-            echo "<script type='text/javascript'>
+                } else {
+                    if (query('SELECT * FROM `user` WHERE `username` =?;', array($username))->rowCount() == 1) {
+                        echo "<script type='text/javascript'>
             swal('Check Username','Username ซํ้า','warning');
             </script>";
+                    }
+                }
             }
         }
-    }
-}
-        if($username and $password and $confpassword !== ""){ 
+        if ($username and $password and $confpassword !== '') {
             query("INSERT INTO `user` (`uid`,`username`,`password`,`point`,`credits`,`rank`,`admin`) VALUES ('','".$username."','".$password."','0','0','member','false')");
-            $i = query("SELECT * FROM `user` WHERE `username` =?;",array($username))->fetch();
+            $i = query('SELECT * FROM `user` WHERE `username` =?;', array($username))->fetch();
             $_SESSION['username'] = $i['username'];
             echo "<script type='text/javascript'>
             setTimeout(function(){
@@ -38,23 +41,24 @@ Class User{
         }
     }
 
-    public function Login($username,$password){
+    public function Login($username, $password)
+    {
         global $api;
-        if($username == ""){ #ตรวจสอบค่าว่าง
+        if ($username == '') { //ตรวจสอบค่าว่าง
             echo "<script type='text/javascript'>
             swal('Check Username','โปรดกรอก Username','warning');
             </script>";
-        }else{
-            if($password == ""){ #ตรวจสอบค่าว่าง
-            echo "<script type='text/javascript'>
+        } else {
+            if ($password == '') { //ตรวจสอบค่าว่าง
+                echo "<script type='text/javascript'>
             swal('Check Password','โปรดกรอก Password','warning');
             </script>";
             }
         }
-        if($username and $password !== ""){
-            if(query("SELECT * FROM `user` WHERE `username` =?;",array($username))->rowCount() == 1){
-                $i = query("SELECT * FROM `user` WHERE `username` =?;",array($username))->fetch();
-                if($i['password'] == $password){
+        if ($username and $password !== '') {
+            if (query('SELECT * FROM `user` WHERE `username` =?;', array($username))->rowCount() == 1) {
+                $i = query('SELECT * FROM `user` WHERE `username` =?;', array($username))->fetch();
+                if ($i['password'] == $password) {
                     $_SESSION['username'] = $i['username'];
                     $_SESSION['point'] = $i['point'];
                     $_SESSION['admin'] = $i['admin'];
@@ -65,7 +69,7 @@ Class User{
                             location.href = '?page=index';
                         }, 2000);
                         </script>";
-                }else{
+                } else {
                     echo "<script type='text/javascript'>
                     swal('Error','Username & Password ไม่ถูกต้อง','error');
                     </script>";
@@ -74,7 +78,8 @@ Class User{
         }
     }
 
-    public function Logout(){
+    public function Logout()
+    {
         session_destroy();
         echo "<script type='text/javascript'>
               swal('Success','ออกจากระบบสำเร็จ','success');
@@ -84,28 +89,27 @@ Class User{
                     </script>";
     }
 
-    public function ChangePassword($oldpassword,$newpassword,$repassword){
-        if(query("SELECT * FROM `user` WHERE `password` = '$oldpassword' AND `username` =?;",array($_SESSION['username']))->rowCount()==1){
-            $u = query("SELECT * FROM `user` WHERE `username` =?;",array($_SESSION['username']))->fetch();
-            
-            if($oldpassword == $u['password']){
-                if($newpassword == $repassword){
-                    query("UPDATE `user` SET `password` = '$newpassword' WHERE `username` =?;",array($_SESSION['username']));
+    public function ChangePassword($oldpassword, $newpassword, $repassword)
+    {
+        if (query("SELECT * FROM `user` WHERE `password` = '$oldpassword' AND `username` =?;", array($_SESSION['username']))->rowCount() == 1) {
+            $u = query('SELECT * FROM `user` WHERE `username` =?;', array($_SESSION['username']))->fetch();
+
+            if ($oldpassword == $u['password']) {
+                if ($newpassword == $repassword) {
+                    query("UPDATE `user` SET `password` = '$newpassword' WHERE `username` =?;", array($_SESSION['username']));
                     echo "<script type='text/javascript'>
                     swal('Success','เปลี่ยนรหัสผ่านสำเร็จ!','success');
                     </script>";
-                }else{
+                } else {
                     echo "<script type='text/javascript'>
                 swal('Error','รหัสผ่านไม่ตรงกัน!','error');
                 </script>";
                 }
             }
-        }else{
+        } else {
             echo "<script type='text/javascript'>
             swal('Error','เปลี่ยนรหัสผ่านไม่สำเร็จ รหัสผ่านเก่าไม่ถูกต้อง!','error');
             </script>";
         }
-        
     }
 }
-?>
