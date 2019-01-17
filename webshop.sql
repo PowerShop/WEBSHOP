@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 01, 2019 at 11:21 AM
+-- Generation Time: Jan 17, 2019 at 10:25 AM
 -- Server version: 10.1.36-MariaDB
 -- PHP Version: 7.2.11
 
@@ -25,6 +25,28 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `categoryshop`
+--
+
+CREATE TABLE `categoryshop` (
+  `id` int(11) NOT NULL,
+  `category` varchar(255) NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `server` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `link` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `categoryshop`
+--
+
+INSERT INTO `categoryshop` (`id`, `category`, `name`, `server`, `link`) VALUES
+(1, 'rank', 'ยศ', 'Survival', 'rank'),
+(2, 'money', 'เงิน', 'Minigame', 'money');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `code`
 --
 
@@ -36,6 +58,28 @@ CREATE TABLE `code` (
   `point` int(11) NOT NULL,
   `keynum` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `history`
+--
+
+CREATE TABLE `history` (
+  `id` int(11) NOT NULL,
+  `truewallet` varchar(255) NOT NULL,
+  `truemoney` varchar(255) NOT NULL,
+  `amount` varchar(255) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `date` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `history`
+--
+
+INSERT INTO `history` (`id`, `truewallet`, `truemoney`, `amount`, `name`, `date`) VALUES
+(1, '50001476973771', '', '100.00', 'Min', '15-01-2019 22:11:29');
 
 -- --------------------------------------------------------
 
@@ -78,16 +122,17 @@ CREATE TABLE `item` (
   `image` varchar(255) CHARACTER SET latin1 NOT NULL,
   `price` int(11) NOT NULL,
   `page` varchar(255) CHARACTER SET latin1 NOT NULL,
-  `category` varchar(255) CHARACTER SET latin1 NOT NULL
+  `category` varchar(255) CHARACTER SET latin1 NOT NULL,
+  `server` varchar(255) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `item`
 --
 
-INSERT INTO `item` (`id`, `name`, `command1`, `command2`, `command3`, `command4`, `command5`, `command6`, `command7`, `command8`, `command9`, `command10`, `image`, `price`, `page`, `category`) VALUES
-(1, '1', '', '', '', '', '', '', '', '', '', '', 'https://www.picz.in.th/images/2018/03/24/S2UrP2.jpg', 0, '1', ''),
-(2, 'Test', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', 'https://powershop.cf/webb/page/img/01.jpg', 1, '2', '');
+INSERT INTO `item` (`id`, `name`, `command1`, `command2`, `command3`, `command4`, `command5`, `command6`, `command7`, `command8`, `command9`, `command10`, `image`, `price`, `page`, `category`, `server`) VALUES
+(1, '1', 'say {user} Hiiii', '', '', '', '', '', '', '', '', '', 'https://www.picz.in.th/images/2018/03/24/S2UrP2.jpg', 1, '1', 'rank', 'Survival'),
+(2, 'Test', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', 'https://www.picz.in.th/images/2018/03/24/S2UrP2.jpg', 1, '1', 'money', 'Minigame');
 
 -- --------------------------------------------------------
 
@@ -115,6 +160,28 @@ INSERT INTO `jackpot` (`id`, `number`, `name`, `point`, `command`, `keynum`) VAL
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `server`
+--
+
+CREATE TABLE `server` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `ip` varchar(255) NOT NULL,
+  `port` varchar(255) NOT NULL,
+  `rconpass` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `server`
+--
+
+INSERT INTO `server` (`id`, `name`, `ip`, `port`, `rconpass`) VALUES
+(1, 'Survival', '35.200.181.222', '19132', 'OW5DoJsAIJ'),
+(2, 'Minigame', '127.0.0.1', '19132', '1212312121');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `user`
 --
 
@@ -134,12 +201,21 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`uid`, `username`, `password`, `point`, `credits`, `avatar`, `rank`, `admin`) VALUES
-(8, 'Min', '12345', 1156, 0, 'https://www.picz.in.th/images/2018/03/28/SV5bWR.gif', 'member', 'true'),
-(21, 'AnuchitZaza', '123456', 1000, 0, '', '', 'false');
+(8, 'Min', '12345', 1067, 0, 'https://www.picz.in.th/images/2018/03/28/SV5bWR.gif', 'member', 'true'),
+(21, 'AnuchitZaza', '123456', 1000, 0, '', '', 'false'),
+(22, 'root3', '1234567890', 0, 0, '', 'member', 'false'),
+(23, '_SlothCraft_', 'tinnapop123', 0, 0, '', 'member', 'false'),
+(24, 'Sukito', 'zaxzx12', 0, 0, '', 'member', 'false');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `categoryshop`
+--
+ALTER TABLE `categoryshop`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `code`
@@ -149,6 +225,12 @@ ALTER TABLE `code`
   ADD UNIQUE KEY `name_3` (`name`),
   ADD KEY `name` (`name`),
   ADD KEY `name_2` (`name`);
+
+--
+-- Indexes for table `history`
+--
+ALTER TABLE `history`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `img`
@@ -169,6 +251,12 @@ ALTER TABLE `jackpot`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `server`
+--
+ALTER TABLE `server`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `user`
 --
 ALTER TABLE `user`
@@ -179,9 +267,21 @@ ALTER TABLE `user`
 --
 
 --
+-- AUTO_INCREMENT for table `categoryshop`
+--
+ALTER TABLE `categoryshop`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `code`
 --
 ALTER TABLE `code`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `history`
+--
+ALTER TABLE `history`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
@@ -203,10 +303,16 @@ ALTER TABLE `jackpot`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT for table `server`
+--
+ALTER TABLE `server`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `uid` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `uid` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
