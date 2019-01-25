@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 17, 2019 at 10:25 AM
+-- Generation Time: Jan 25, 2019 at 02:31 PM
 -- Server version: 10.1.36-MariaDB
 -- PHP Version: 7.2.11
 
@@ -59,6 +59,18 @@ CREATE TABLE `code` (
   `keynum` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `code`
+--
+
+INSERT INTO `code` (`id`, `name`, `redeem`, `command`, `point`, `keynum`) VALUES
+(4, 'Code', '5rt4hRSDjE4JgbP1', '', 0, 1),
+(5, '5AnN2j9u70QLkYmF', '5AnN2j9u70QLkYmF', '', 0, 1),
+(6, 'ySVC2lfYolByZso6', 'ySVC2lfYolByZso6', '', 0, 1),
+(7, 'f2UKAhjzoualb2Fp', 'f2UKAhjzoualb2Fp', '1', 0, 1),
+(8, '4XAGt4atppBn24cK', '4XAGt4atppBn24cK', '0', 0, 1),
+(9, 'lhEzXFHcO3ALQ8L8', 'lhEzXFHcO3ALQ8L8', '1', 0, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -79,7 +91,7 @@ CREATE TABLE `history` (
 --
 
 INSERT INTO `history` (`id`, `truewallet`, `truemoney`, `amount`, `name`, `date`) VALUES
-(1, '50001476973771', '', '100.00', 'Min', '15-01-2019 22:11:29');
+(3, '50001476973771', '', '100.00', 'Min', '19-01-2019 23:16:53');
 
 -- --------------------------------------------------------
 
@@ -154,7 +166,7 @@ CREATE TABLE `jackpot` (
 --
 
 INSERT INTO `jackpot` (`id`, `number`, `name`, `point`, `command`, `keynum`) VALUES
-(1, '1', 'Diamond × 3', '10', 'give {user} Diamond 3', '1'),
+(1, '1', 'Diamond × 3', '10', 'give {user} Diamond 3', '3'),
 (2, '2', '10 พอยท์', '10', 'give {user} Diamond 6', '2');
 
 -- --------------------------------------------------------
@@ -201,7 +213,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`uid`, `username`, `password`, `point`, `credits`, `avatar`, `rank`, `admin`) VALUES
-(8, 'Min', '12345', 1067, 0, 'https://www.picz.in.th/images/2018/03/28/SV5bWR.gif', 'member', 'true'),
+(8, 'Min', '12345', 1167, 0, 'https://www.picz.in.th/images/2018/03/28/SV5bWR.gif', 'member', 'true'),
 (21, 'AnuchitZaza', '123456', 1000, 0, '', '', 'false'),
 (22, 'root3', '1234567890', 0, 0, '', 'member', 'false'),
 (23, '_SlothCraft_', 'tinnapop123', 0, 0, '', 'member', 'false'),
@@ -276,13 +288,13 @@ ALTER TABLE `categoryshop`
 -- AUTO_INCREMENT for table `code`
 --
 ALTER TABLE `code`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `history`
 --
 ALTER TABLE `history`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `img`
