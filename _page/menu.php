@@ -24,6 +24,9 @@
             <li class="nav-item active">
                 <a class="nav-link" href="?page=profile"><i class="fa fa-address-card-o" aria-hidden="true"></i> โปรไฟล์</a>
             </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="?page=wallet"><i class="fa fa-money" aria-hidden="true"></i> Refill</a>
+            </li>
             <?php if ($_SESSION['admin'] == 'true') {
     echo '<li class="nav-item active">
                 <a class="nav-link" href="?page=backend"><i class="fa fa-cog" aria-hidden="true"></i> จัดการหลังร้าน</a>

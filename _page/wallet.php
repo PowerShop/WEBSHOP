@@ -1,3 +1,10 @@
+<?php
+if (!$_SESSION['username']) {
+    rdr('?page=login');
+} else {
+    //NoCode
+}
+?>
 <!doctype html>
 <html lang="en">
   <head>
@@ -101,8 +108,8 @@ if (isset($_POST['refill'])) {
 
             foreach ($activities as $arr) {
                 // Check is paid-in
-                if ($arr['text3En'] == 'creditor') {
-                    $data = $api->wallet->FetchTxDetail($token, $arr['reportID']);
+                if ($arr['original_action'] == 'creditor') {
+                    $data = $api->wallet->FetchTxDetail($token, $arr['report_id']);
 
                     // Transaction ID
                     $tx['id'] = $data['section4']['column2']['cell1']['value'];
@@ -111,23 +118,31 @@ if (isset($_POST['refill'])) {
                     $tx['amount'] = str_replace(',', '', $data['section3']['column1']['cell1']['value']);
 
                     // Then you can check user input and connect to database.
+
+                    $username = $_SESSION['username'];
+
                     $ref = $_POST['tranid'];
                     if ($tx['id'] == $ref) {
+
                         if (query("SELECT * FROM history WHERE truewallet = '$ref'")->rowCount() == 1) {
                             echo '<script type="text/javascript">
                         swal("Error","เติมเงินไม่สำเร็จ \n หมายเลขอ้างอิง ' . $ref . ' ถูกใช้งานเเล้ว","error");
                         </script>';
-                        break;
+                            break;
                         } else {
-                            $username = $_SESSION['username'];
                             $amount = $tx['amount'];
+                            $a = $amount;
+                            $b = $pdo['point'];
+                            $c = $a + $b;
                             query("INSERT INTO `history`(`truewallet`,`amount`,`name`,`date`) VALUES('" . $ref . "','" . $amount . "','" . $username . "','" . $time . "')");
+                            query("UPDATE `user` SET `point` = '$c' WHERE `username` = '$username'");
+
                             echo '<script type="text/javascript">
                         swal("Success","เติมเงินสำเร็จ ' . $tx['amount'] . ' บาท","success");
                         </script>';
-                        break;
+                            break;
                         }
-                    }elseif ($tx['id'] !== $ref) {
+                    } elseif ($tx['id'] !== $ref) {
                         echo '<script type="text/javascript">
                         swal("Error","เติมไม่เงินสำเร็จ หมายเลขอ้างอิงไม่มีอยู่ในระบบ","error");
                         </script>';
@@ -140,7 +155,13 @@ if (isset($_POST['refill'])) {
             $cashcard = $_POST['cash'];
             $topup = json_decode($api->wallet->CashcardTopup($token, $cashcard));
             if (isset($topup->amount)) {
+                $amount = $topup->amount;
+                $a = $amount;
+                $b = $pdo['point'];
+                $c = $a + $b;
                 if (query('SELECT * FROM `user` WHERE `username` =?;', array($username))->rowCount() == 1) {
+                    query("INSERT INTO `history`(`truemoney`,`amount`,`name`,`date`) VALUES('" . $cashcard . "','" . $amount . "','" . $username . "','" . $time . "')");
+                    query("UPDATE `user` SET `point` = '$c' WHERE `username` = '$username'");
                     echo '<script type="text/javascript">
                         swal("Success","เติมเงินสำเร็จ ' . $topup->amount . ' บาท","success");
                         </script>';
