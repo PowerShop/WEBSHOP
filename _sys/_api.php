@@ -7,7 +7,6 @@ require dirname(__FILE__).'/_redeem.php';
 require dirname(__FILE__).'/_jackpot.php';
 require dirname(__FILE__).'/_shop.php';
 require dirname(__FILE__).'/_wallet.php';
-
 /* APIs */
 $api = (object) array(
     'sql' => new PDO('mysql:host='.$_config['db_host'].'; dbname='.$_config['db_database'].';', $_config['db_user'], $_config['db_password']),

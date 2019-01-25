@@ -6,7 +6,7 @@ class Jackpot
         global $api;
         @ini_set('display_errors', '0');
         $key = "";
-        $key .= rand(1, 100);
+        $key .= rand(1, 1);
         $key .= "";
         require dirname(__FILE__) . '/_rcon.php';
 
@@ -64,7 +64,6 @@ class Jackpot
                 }
 
             }
-
         } else {
             query("UPDATE `user` SET `point` = '$z' WHERE `username`=?;", array($_SESSION['username']));
             echo "<script type='text/javascript'>
