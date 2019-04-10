@@ -82,5 +82,27 @@ class Shop
         }
     }
 
+    public function add($title, $price, $command1, $command2, $command3, $command4, $command5, $command6, $command7, $command8, $command9, $command10, $image, $category,$server)
+    {
+        global $api;
+        if ($_SESSION['admin'] == 'true') {
+            query("INSERT INTO `item` (`id`,`name`,`price`,`image`,`command1`,`command2`,`command3`,`command4`,`command5`,`command6`,`command7`,`command8`,`command9`,`command10`,`category`,`server`) VALUES ('?','".$title."','".$price."','".$image."','".$command1."','".$command2."','".$command3."','".$command4."','".$command5."','".$command6."','".$command7."','".$command8."','".$command9."','".$command10."','".$category."','".$server."')");
+            echo "<script type='text/javascript'>
+                swal('Success','ดำเนินการสำเร็จ เพิ่มสินค้า $title เเล้ว!','success');
+                </script>";
+        } else {
+        }
+    }
 
+    public function delete($id)
+    {
+        global $api;
+        if (isset($_SESSION['admin']) == 'true') {
+            query('DELETE FROM `item` WHERE `id`=?;',array($id));
+            echo "<script type='text/javascript'>
+                swal('Success','ดำเนินการสำเร็จ ลบสินค้าเเล้ว!','success');
+                </script>";
+        } else {
+        }
+    }
 }
