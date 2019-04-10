@@ -32,7 +32,7 @@ if(!$_SESSION['username']){
           <img class="card-img-top" alt="">
           <div class="card-body">
               <p class="card-text text-center"><i class="fa fa-money" aria-hidden="true"></i> พอยท์คงเหลือ : <?php echo $pdo['point']; ?></p>
-              <p class="card-text text-center" style="text-align: center;"><button type="submit" name="Random" class="btn btn-primary"<?php if($pdo['point'] <= 0){ echo 'disabled'; }else{ }?>>สุ่ม Jackpot</button><br class="mt-2"/><font color="red">การสุ่ม 1 ครั้งใช้ 1 Point</font></p>
+              <p class="card-text text-center" style="text-align: center;"><button type="submit" name="Random" class="btn btn-primary" <?php if($pdo['point'] <= 0){ echo 'disabled'; }else{ }?>>สุ่ม Jackpot</button><br class="mt-2"/><font color="red">การสุ่ม 1 ครั้งใช้ 1 Point</font></p>
           </div>
       </div>
 </form>
@@ -104,4 +104,4 @@ if(!$_SESSION['username']){
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
   </body>
 </html>
-<?php if(isset($_POST['Random'])){ $data = 1; $api->jackpot->Random($data); } ?>
+<?php if(isset($_POST['Random'])){ $server = $_GET['server']; $api->jackpot->Random($server); } ?>

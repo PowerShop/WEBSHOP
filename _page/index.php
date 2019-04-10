@@ -88,7 +88,7 @@ if ($result = query($query)) {
     <div class="card-body">
       <h4 class="card-title"><i class="fa fa-trophy" aria-hidden="true"></i> อันดับยอดเติมเงินสูงสุด</h4>
       <p class="card-text">
-        <table class="text-center table">
+        <table class="text-center table" width="100%" style="overflow-x:auto; font-size: 12px;">
           <thead>
             <tr>
               <th>#</th>

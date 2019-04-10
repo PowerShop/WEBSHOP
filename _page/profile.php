@@ -3,6 +3,7 @@ if (!$_SESSION['username']) {
     rdr('?page=login');
 } else {
     //NoCode
+/*$pdo มาจากไฟล์ index.php */
 }
 ?>
 <!doctype html>
@@ -35,36 +36,47 @@ if (!$_SESSION['username']) {
             <p class="card-text text-center"><i class="fas fa-piggy-bank"></i> พอยท์สะสม : <?php echo $pdo['credits']; ?> </p>
             <p class="card-text text-center"><i class="fas fa-trophy"></i> ระดับสมาชิก : <?php echo $pdo['rank']; ?></p>
             <p class="card-text" style="text-align: center;"><button type="button" data-toggle="modal" data-target="#changepass" class="btn btn-danger"><i class="fas fa-cog"></i> เปลี่ยนรหัสผ่าน </button></p>
+             <p class="card-text" style="text-align: center;"><button type="button" data-toggle="modal" data-target="#changeavatar" class="btn btn-warning"><i class="fas fa-cog"></i> เปลี่ยน Avatar </button></p>
             </div>
       </div>
+
       <div class="card mt-2 bg-warning">
           <img class="card-img-top" alt="">
           <div class="card-body">
-              <h4 class="card-title text-center"><i class="fas fa-history"></i> ประวัติการเติมพอทย์</h4>
+              <h4 class="card-title text-center"><i class="fas fa-history"></i> ประวัติการเติมพอทย์ ( TrueWallet & TrueMoney)</h4>
           </div>
       </div>
-      <div class="card mt-2 col-md-12">
+      <div class="card mt-2 col-md-12" >
           <img class="card-img-top" alt="">
-          <div class="card-body">
-          <table class="table bg-light text-center">
+          <div class="card-body" style="overflow-x:auto;">
+          <table class="table text-center" style="font-size: 14px">
                   <thead>
                       <tr>
-                          <th>#</th>
-                          <th>#</th>
-                          <th>#</th>
+                          <th>เลขอ้างอิง</th>
+                          <th>จำนวนเงิน</th>
+                           <th>ช่องทางการเติม</th>
+                          <th>วันเวลาที่เติม</th>
                       </tr>
                   </thead>
+ <?php
+$query = "SELECT * FROM `history` WHERE `name` = '" . $_SESSION['username'] . "'";
+if ($result = query($query)) {
+    while ($row = $result->fetch()) {
+        ?>
                   <tbody>
                       <tr>
-                          <td scope="row">#</td>
-                          <td>#</td>
-                          <td>#</td>
+                          <td scope="row"><?php echo $row['truewallet']; ?></td!>
+                          <td><?php echo $row['amount']; ?> บาท</td>
+                          <td><?php echo $row['payment']; ?></td>
+                          <td><?php echo $row['date']; ?></td>
                       </tr>
                   </tbody>
+<?php }} ?>
               </table>
           </div>
       </div>
       <?php include 'footer.php'; ?>
+<br />
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -114,6 +126,40 @@ if (!$_SESSION['username']) {
     $newpassword = $_POST['new-password'];
     $repassword = $_POST['re-password'];
     $api->user->ChangePassword($oldpassword, $newpassword, $repassword);
+}
+?>
+</div>
+
+<div class="container">
+<!-- Trigger the modal with a button -->
+<!-- Modal -->
+<div class="modal fade" id="changeavatar" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 style="text-align: center; font-size: 20px" class="modal-title">Change Avatar</h4>
+      </div>
+      <div class="modal-body">
+    <form method="post">
+      <div class="form-group">
+        <label for="avatar">ลิ้งรูปอวตาร์</label>
+        <input type="text" class="form-control" name="avatar" id="avatar" aria-describedby="helpId" placeholder="ลิ้งค์อวตาร์" value="<?php echo $pdo['avatar']; ?>">
+        <small id="helpId" class="form-text text-muted">ลิ้งรูปอวตาร์ Ex. https://myweb.com/img/avatar.png ( png , jpeg , gif )</small>
+      </div>
+      <div class="modal-footer">
+      <button type="submit" name="changeavatar" class="btn btn-success">ยืนยัน</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
+      </div>
+    </div>
+
+</form>
+  </div>
+</div>
+
+<?php if (isset($_POST['changeavatar'])) {
+    $linkavatar = $_POST['avatar'];
+    $api->user->ChangeAvatar($linkavatar);
 }
 ?>
 

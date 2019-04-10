@@ -92,15 +92,19 @@ if (!$_SESSION['username']) {
 date_default_timezone_set("Asia/Bangkok");
 $time = trim(date("d-m-Y H:i:s"));
 if (isset($_POST['refill'])) {
+
+$i = query('SELECT * FROM `sys_truewallet`')->fetch();
+$username = $i['username'];
+$password = $i['password'];
     // Login
-    $token = $api->wallet->GetToken('aaaxcvg@gmail.com', 'Jonathan1997');
+    $token = $api->wallet->GetToken($username, $password);
 
     // If successfully login
 
     if ($token != null) {
         if ($_POST['tranid']) {
             // Transaction date range
-            $start_date = date('Y-m-d', strtotime('-100 days'));
+            $start_date = date('Y-m-d', strtotime('-999 days'));
             $end_date = date('Y-m-d', strtotime('1 days'));
 
             // Perform Fetch
@@ -134,7 +138,8 @@ if (isset($_POST['refill'])) {
                             $a = $amount;
                             $b = $pdo['point'];
                             $c = $a + $b;
-                            query("INSERT INTO `history`(`truewallet`,`amount`,`name`,`date`) VALUES('" . $ref . "','" . $amount . "','" . $username . "','" . $time . "')");
+$TrueWallet = 'TrueWallet';
+                            query("INSERT INTO `history`(`truewallet`,`amount`,`payment`,`name`,`date`) VALUES('" . $ref . "','" . $amount . "','". $TrueWallet ."','" . $username . "','" . $time . "')");
                             query("UPDATE `user` SET `point` = '$c' WHERE `username` = '$username'");
 
                             echo '<script type="text/javascript">
@@ -159,8 +164,9 @@ if (isset($_POST['refill'])) {
                 $a = $amount;
                 $b = $pdo['point'];
                 $c = $a + $b;
+$TrueMoney = 'TrueMoney';
                 if (query('SELECT * FROM `user` WHERE `username` =?;', array($username))->rowCount() == 1) {
-                    query("INSERT INTO `history`(`truemoney`,`amount`,`name`,`date`) VALUES('" . $cashcard . "','" . $amount . "','" . $username . "','" . $time . "')");
+                    query("INSERT INTO `history`(`truemoney`,`amount`,`name`,`date`) VALUES('" . $cashcard . "','" . $amount . "','". $TrueMoney ."','" . $username . "','" . $time . "')");
                     query("UPDATE `user` SET `point` = '$c' WHERE `username` = '$username'");
                     echo '<script type="text/javascript">
                         swal("Success","เติมเงินสำเร็จ ' . $topup->amount . ' บาท","success");
