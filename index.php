@@ -7,7 +7,7 @@
 require dirname(__FILE__).'/_sys/_api.php';
 require_once './_sys/_rcon.php';
 require_once './_dist/_css/_core.php';
-$api_files = './_sys/_api.php';
+
 ob_start();
 session_start();
 
