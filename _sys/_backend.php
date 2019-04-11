@@ -122,7 +122,9 @@ $categorys = $item['category'];
   public function edititem($id,$name,$price,$img,$server,$category,$c1,$c2,$c3,$c4,$c5,$c6,$c7,$c8,$c9,$c10)
   {
   	global $api;
-  		query("UPDATE `item` SET `name` = '$name', `command1` = '$c1', `command2` = '$c2', `command3` = '$c3', `command4` = '$c4', `command5` = '$c5', `command6` = '$c6', `command7` = '$c7', `command8` = '$c8', `command9` = '$c9', `command10` = '$c10', `image` = '$img', `price` = '$price', `category` = '$category', `server` = '$server' WHERE `item`.`id` = '$id'");
+	  $i = query("SELECT * FROM `categoryshop` WHERE `name` = ?;", array($category))->fetch();
+$categorys = $i['category'];
+  		query("UPDATE `item` SET `name` = '$name', `command1` = '$c1', `command2` = '$c2', `command3` = '$c3', `command4` = '$c4', `command5` = '$c5', `command6` = '$c6', `command7` = '$c7', `command8` = '$c8', `command9` = '$c9', `command10` = '$c10', `image` = '$img', `price` = '$price', `category` = '$categorys', `server` = '$server' WHERE `item`.`id` = '$id'");
   		$item = query("SELECT * FROM `item` WHERE `id` = ?;", array($id))->fetch();
   		echo "<script type='text/javascript'><?php
 /* ระบบ Save ข้อมูล Backend */
