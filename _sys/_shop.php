@@ -73,10 +73,8 @@ class Shop
             query('UPDATE `user` SET `point`=? WHERE `username`=?;', array($point, $_SESSION['username']));
             $itemname = $item['name'];
             echo "<script type='text/javascript'>
-echo "<script type='text/javascript'>
-            setTimeout(function(){
-				location.href = '?page=shop&name=$category&server=$name';
-				}, 2000);
+setTimeout(function(){			
+	location.href = '?page=shop&name=$category&server=$name';				}, 2000);
                 swal('Success','ดำเนินการสำเร็จ กรุณารอรับไอเทม $itemname ภายในเกม!','success');
                 </script>";
 
@@ -85,6 +83,4 @@ echo "<script type='text/javascript'>
             return false;
         }
     }
-
-    
 }
