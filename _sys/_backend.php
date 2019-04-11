@@ -19,8 +19,10 @@ class Backend
 	public function additem($title, $price, $command1, $command2, $command3, $command4, $command5, $command6, $command7, $command8, $command9, $command10, $image, $category,$server)
     {
         global $api;
+		$item = query("SELECT * FROM `categoryshop` WHERE `name` = ?;", array($category))->fetch();
+$categorys = $item['category'];
         if ($_SESSION['admin'] == 'true') {
-            query("INSERT INTO `item` (`id`,`name`,`price`,`image`,`command1`,`command2`,`command3`,`command4`,`command5`,`command6`,`command7`,`command8`,`command9`,`command10`,`category`,`server`) VALUES ('?','".$title."','".$price."','".$image."','".$command1."','".$command2."','".$command3."','".$command4."','".$command5."','".$command6."','".$command7."','".$command8."','".$command9."','".$command10."','".$category."','".$server."')");
+            query("INSERT INTO `item` (`id`,`name`,`price`,`image`,`command1`,`command2`,`command3`,`command4`,`command5`,`command6`,`command7`,`command8`,`command9`,`command10`,`category`,`server`) VALUES ('?','".$title."','".$price."','".$image."','".$command1."','".$command2."','".$command3."','".$command4."','".$command5."','".$command6."','".$command7."','".$command8."','".$command9."','".$command10."','".$categorys."','".$server."')");
             echo "<script type='text/javascript'>
             setTimeout(function(){
 				location.href = '?page=backend&additem=true';
