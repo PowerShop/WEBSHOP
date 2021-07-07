@@ -6,7 +6,7 @@ This Is A WEBSHOP <br />
 Wednesday 10 April 2019 22:38 PM
 
 # Version <br />
-Final Version 1.0 LTS
+Lastest Version 1.0
 
 # Contact <br />
 <a href="https://fb.me/Min.Sakmueang"><u>Facebook</u></a>
