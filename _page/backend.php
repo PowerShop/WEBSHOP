@@ -743,7 +743,7 @@ $query = "SELECT * FROM `sys_truewallet`";
             <?php 
             if (isset($_GET['systemall']))
             { 
-            	if ($_GET['imgslide'])
+            	if (isset($_GET['imgslide']))
             {
             	?>
             <div class="card mt-2">
@@ -800,7 +800,7 @@ $query = 'SELECT * FROM `img`';
 	<?php 
             if (isset($_GET['systemall']))
             { 
-            	if ($_GET['fbpage'])
+            	if (isset($_GET['fbpage']))
             {
             ?>
 <div class="card mt-2">
@@ -841,6 +841,7 @@ $query = 'SELECT * FROM `system`';
   </body>
 </html>
 <?php
+@ini_set('display_errors', '0');
 if (isset($_POST['saverefill']))
 {
 	$email = $_POST['walletemail'];
@@ -1028,7 +1029,7 @@ if (isset($_POST['addimg']))
 
 if (isset($_GET['systemall']))
 {
-	if ($_GET['imgdelid'])
+	if (isset($_GET['imgdelid']))
 	{
 		$id = $_GET['imgdelid'];
 		
